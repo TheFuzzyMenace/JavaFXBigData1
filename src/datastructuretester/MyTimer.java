@@ -13,7 +13,7 @@ public class MyTimer {
     }
     
     public static long stopTime() {
-        return System.currentTimeMillis() - startTime;
+        return (System.currentTimeMillis() - startTime) / 1000;
     }
     
     public static void startMicroTime(){
