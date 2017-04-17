@@ -137,7 +137,7 @@ public class DataStructureTester extends Application {
 //            }
             StringBuilder sb = new StringBuilder();
             String newLine = "\n";
-            for (int i = 0; i < 30000; i++) {
+            for (int i = 0; i < 3000; i++) {
                 sb.append(i).append(newLine);
             }
             taData.setText(sb.toString());
