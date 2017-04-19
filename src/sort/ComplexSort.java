@@ -52,60 +52,66 @@ public class ComplexSort {
     }
 //--------------------------------------------------------------------------------
 
-    public static void swap(int A[], int x, int y) {
-        int temp = A[x];
-        A[x] = A[y];
-        A[y] = temp;
-    }
-
-    // Reorganizes the given list so all elements less than the first are 
-    // before it and all greater elements are after it.                   
-    public static int partition(int A[], int f, int l) {
-  
-            int pivot = A[f];
-            while (f < l) {
-                if (A[f] == pivot || A[l] == pivot) {
-
-                }
-                while (A[f] < pivot) {
-                    f++;
-                }
-                while (A[l] > pivot) {
-                    l--;
-                }
-                swap(A, f, l);
-            
-            } 
-
-
-        return f;
-    }
-
-    public static void quickSort(int A[], int f, int l) {
-
-        if (f >= l) {
-            return;
+    public static void quickSort(int[] a, String direction) {
+        if (direction.equalsIgnoreCase("A")) {
+            recursiveQuickSortAsc(a, 0, a.length - 1);
         }
-        int pivot_index = partition(A, f, l);
-        quickSort(A, f, pivot_index);
-        quickSort(A, pivot_index + 1, l);
-
+        if (direction.equalsIgnoreCase("D")) {
+            recursiveQuickSortDsc(a, 0, a.length);
+        }
     }
 
-    // Usage: java QuickSort [integer] ...
-    // All integers must be distinct
-    public static void main(String argv[]) {
-        int A[] = new int[argv.length];
-        for (int i = 0; i < argv.length; i++) {
-            A[i] = Integer.parseInt(argv[i]);
+    public static void recursiveQuickSortAsc(int[] a, int startIndex, int endIndex) {
+
+        int idx = partition(a, startIndex, endIndex);
+
+        if (startIndex < idx - 1) {
+            recursiveQuickSortAsc(a, startIndex, idx - 1);
         }
 
-        quickSort(A, 0, argv.length - 1);
-
-        for (int i = 0; i < argv.length; i++) {
-            System.out.print(A[i] + " ");
+        if (endIndex > idx) {
+            recursiveQuickSortAsc(a, idx, endIndex);
         }
-        System.out.println();
     }
 
+    public static int partition(int[] a, int left, int right) {
+        int pivot = a[left];
+
+        while (left <= right) {
+
+            while (a[left] < pivot) {
+                left++;
+            }
+            while (a[right] > pivot) {
+                right--;
+            }
+            if (left <= right) {
+                int tmp = a[left];
+                a[left] = a[right];
+                a[right] = tmp;
+
+                left++;
+                right--;
+            }
+        }
+        return left;
+    }
+    public static void recursiveQuickSortDsc(int[] a, int left, int right) {
+        if (left < right) {
+            int pivot = left;
+            for (int i = left + 1; i < right; i++) {
+                if (a[i] > a[left]) {
+                    swapDsc(a, i, ++pivot);
+                }
+            }
+            swapDsc(a, left, pivot);
+            recursiveQuickSortDsc(a, left, pivot);
+            recursiveQuickSortDsc(a, pivot + 1, right);
+        }
+    }
+    private static void swapDsc(int[] a, int left, int right) {
+        int temp = a[right];
+        a[right] = a[left];
+        a[left] = temp;
+    }
 }

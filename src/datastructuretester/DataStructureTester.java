@@ -268,13 +268,14 @@ public class DataStructureTester extends Application {
         sortMenu.getItems().add(miMergeSortDsc);
 
 //------------------------------------------------------------------------------
-        MenuItem miQuickSort = new MenuItem("Quick Sort");
-        miQuickSort.setOnAction(e -> {
+
+        MenuItem miQuickSortAsc = new MenuItem("Quick Sort Ascending");
+        miQuickSortAsc.setOnAction(e -> {
             int[] nums = text2IntArray(taData.getText());
             taStatus.setText("Converting text to array took " + MyTimer.stopMicroTime() + "us");
             MyTimer.startMicroTime();
             MyTimer.startTime();
-            quickSort(nums, 0, nums.length -1);
+            quickSort(nums,"A");
             taStatus.appendText("\nSort finished in " + MyTimer.stopMicroTime() + "us");
             MyTimer.startMicroTime();
             MyTimer.startTime();
@@ -282,8 +283,23 @@ public class DataStructureTester extends Application {
             taStatus.appendText("\nArray to text finished in " + MyTimer.stopMicroTime() + "us");
 
         });
-        sortMenu.getItems().add(miQuickSort);
+        sortMenu.getItems().add(miQuickSortAsc);
+        
+        MenuItem miQuickSortDsc = new MenuItem("Quick Sort Descending");
+        miQuickSortDsc.setOnAction(e -> {
+            int[] nums = text2IntArray(taData.getText());
+            taStatus.setText("Converting text to array took " + MyTimer.stopMicroTime() + "us");
+            MyTimer.startMicroTime();
+            MyTimer.startTime();
+            quickSort(nums,"D");
+            taStatus.appendText("\nSort finished in " + MyTimer.stopMicroTime() + "us");
+            MyTimer.startMicroTime();
+            MyTimer.startTime();
+            taData.setText(intArray2Text(nums));
+            taStatus.appendText("\nArray to text finished in " + MyTimer.stopMicroTime() + "us");
 
+        });
+        sortMenu.getItems().add(miQuickSortDsc);
         /**
          * *********************************************************************
          * Search Menu Section
