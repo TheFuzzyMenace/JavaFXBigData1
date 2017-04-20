@@ -265,17 +265,27 @@ public class DataStructureTester extends Application {
         sortMenu.getItems().add(miMergeSortAsc);
 
         MenuItem miMergeSortDsc = new MenuItem("Merge Sort Descending");
+        miMergeSortDsc.setOnAction(e -> {
+            MyTimer.startMicroTime();
+            int[] nums = text2IntArray(taData.getText());
+            taStatus.setText("Converting text to array took " + MyTimer.stopMicroTime() + "us");
+            MyTimer.startMicroTime();
+            mergeSort(nums, "D");
+            taStatus.appendText("\nSort finished in " + MyTimer.stopMicroTime() + "us");
+            MyTimer.startMicroTime();
+            taData.setText(intArray2Text(nums));
+            taStatus.appendText("\nArray to text finished in " + MyTimer.stopMicroTime() + "us");
+        });
         sortMenu.getItems().add(miMergeSortDsc);
 
 //------------------------------------------------------------------------------
-
         MenuItem miQuickSortAsc = new MenuItem("Quick Sort Ascending");
         miQuickSortAsc.setOnAction(e -> {
             int[] nums = text2IntArray(taData.getText());
             taStatus.setText("Converting text to array took " + MyTimer.stopMicroTime() + "us");
             MyTimer.startMicroTime();
             MyTimer.startTime();
-            quickSort(nums,"A");
+            quickSort(nums, "A");
             taStatus.appendText("\nSort finished in " + MyTimer.stopMicroTime() + "us");
             MyTimer.startMicroTime();
             MyTimer.startTime();
@@ -284,14 +294,14 @@ public class DataStructureTester extends Application {
 
         });
         sortMenu.getItems().add(miQuickSortAsc);
-        
+
         MenuItem miQuickSortDsc = new MenuItem("Quick Sort Descending");
         miQuickSortDsc.setOnAction(e -> {
             int[] nums = text2IntArray(taData.getText());
             taStatus.setText("Converting text to array took " + MyTimer.stopMicroTime() + "us");
             MyTimer.startMicroTime();
             MyTimer.startTime();
-            quickSort(nums,"D");
+            quickSort(nums, "D");
             taStatus.appendText("\nSort finished in " + MyTimer.stopMicroTime() + "us");
             MyTimer.startMicroTime();
             MyTimer.startTime();

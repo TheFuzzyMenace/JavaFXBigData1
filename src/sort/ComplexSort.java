@@ -96,6 +96,7 @@ public class ComplexSort {
         }
         return left;
     }
+
     public static void recursiveQuickSortDsc(int[] a, int left, int right) {
         if (left < right) {
             int pivot = left;
@@ -109,6 +110,7 @@ public class ComplexSort {
             recursiveQuickSortDsc(a, pivot + 1, right);
         }
     }
+
     private static void swapDsc(int[] a, int left, int right) {
         int temp = a[right];
         a[right] = a[left];
